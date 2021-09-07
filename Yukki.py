@@ -1,6 +1,14 @@
 import os
 import sys
+import asyncio
+import csv
 import random
+from asyncio import sleep
+from telethon.errors.rpcerrorlist import (
+    UserAlreadyParticipantError,
+    UserPrivacyRestrictedError,
+    UserNotMutualContactError
+)
 from datetime import datetime
 from os import execl
 from telethon import TelegramClient, events
@@ -10,8 +18,19 @@ from Config import STRING, SUDO, BIO_MESSAGE, API_ID, API_HASH, STRING2, STRING3
 import asyncio
 import telethon.utils
 from telethon.tl import functions
-from telethon.tl.functions.channels import LeaveChannelRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest
+from telethon.tl.types import InputPeerUser, ChatBannedRights
+from telethon.tl.functions.channels import (
+    InviteToChannelRequest,
+    EditBannedRequest,
+    GetFullChannelRequest,
+    LeaveChannelRequest)
+from telethon.tl.functions.messages import (
+    ImportChatInviteReques,
+    GetFullChatRequest)
+from telethon.errors import (
+    ChannelInvalidError,
+    ChannelPrivateError,
+    ChannelPublicGroupNaError)
 from Utils import RAID, RRAID
 
 
@@ -591,17 +610,17 @@ async def spam(e):
 # @register(outgoing=True, pattern=r"^\.getmemb$")
 async def scrapmem(e):
     if e.sender_id in SMEX_USERS:
-    text = "`Mohon tunggu...`"
-    event = await e.reply(text, parse_mode=None, link_preview=None )
-    e.client
-    members = await e.client.get_participants(chat, aggressive=True)
+        text = "`Mohon tunggu...`"
+        event = await e.reply(text, parse_mode=None, link_preview=None )
+        e.client
+        members = await e.client.get_participants(chat, aggressive=True)
 
-    with open("members.csv", "w", encoding="UTF-8") as f:
-        writer = csv.writer(f, delimiter=",", lineterminator="\n")
-        writer.writerow(["user_id", "hash"])
-        for member in members:
+        with open("members.csv", "w", encoding="UTF-8") as f:
+            writer = csv.writer(f, delimiter=",", lineterminator="\n")
+            writer.writerow(["user_id", "hash"])
+            for member in members:
             writer.writerow([member.id, member.access_hash])
-    await event.edit("`Berhasil Mengumpulkan Member..`")
+        await event.edit("`Berhasil Mengumpulkan Member..`")
 
 
 
@@ -619,40 +638,40 @@ async def scrapmem(e):
 # @register(outgoing=True, pattern=r"^\.addmemb$")
 async def admem(e):
 	if e.sender_id in SMEX_USERS:
-    text = "`Proses Menambahkan 0 Member...`"
-    event = await e.reply(text, parse_mode=None, link_preview=None )
-    chat = await e.get_chat()
-    e.client
-    users = []
-    with open("members.csv", encoding="UTF-8") as f:
-        rows = csv.reader(f, delimiter=",", lineterminator="\n")
-        next(rows, None)
-        for row in rows:
-            user = {'id': int(row[0]), 'hash': int(row[1])}
-            users.append(user)
-    n = 0
-    for user in users:
-        n += 1
-        if n % 10 == 0:
-            await e.edit(f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
-            await asyncio.sleep(900)
-        try:
-            userin = InputPeerUser(user['id'], user['hash'])
-            await e.client(InviteToChannelRequest(chat, [userin]))
-            await asyncio.sleep(random.randrange(5, 7))
-            await e.edit(f"`Prosess Menambahkan {n} Member...`")
-        except TypeError:
-            n -= 1
-            continue
-        except UserAlreadyParticipantError:
-            n -= 1
-            continue
-        except UserPrivacyRestrictedError:
-            n -= 1
-            continue
-        except UserNotMutualContactError:
-            n -= 1
-            continue
+        text = "`Proses Menambahkan 0 Member...`"
+        event = await e.reply(text, parse_mode=None, link_preview=None )
+        chat = await e.get_chat()
+        e.client
+        users = []
+        with open("members.csv", encoding="UTF-8") as f:
+            rows = csv.reader(f, delimiter=",", lineterminator="\n")
+            next(rows, None)
+            for row in rows:
+                user = {'id': int(row[0]), 'hash': int(row[1])}
+                users.append(user)
+        n = 0
+        for user in users:
+            n += 1
+            if n % 10 == 0:
+                await e.edit(f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
+                await asyncio.sleep(900)
+            try:
+                userin = InputPeerUser(user['id'], user['hash'])
+                await e.client(InviteToChannelRequest(chat, [userin]))
+                await asyncio.sleep(random.randrange(5, 7))
+                await e.edit(f"`Prosess Menambahkan {n} Member...`")
+            except TypeError:
+                n -= 1
+                continue
+            except UserAlreadyParticipantError:
+                n -= 1
+                continue
+            except UserPrivacyRestrictedError:
+                n -= 1
+                continue
+            except UserNotMutualContactError:
+                n -= 1
+                continue
 
 # =============[BATAS]=============
             
