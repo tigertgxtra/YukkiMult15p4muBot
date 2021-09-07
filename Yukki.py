@@ -619,7 +619,7 @@ async def scrapmem(e):
             writer = csv.writer(f, delimiter=",", lineterminator="\n")
             writer.writerow(["user_id", "hash"])
             for member in members:
-            writer.writerow([member.id, member.access_hash])
+                writer.writerow([member.id, member.access_hash])
         await event.edit("`Berhasil Mengumpulkan Member..`")
 
 
