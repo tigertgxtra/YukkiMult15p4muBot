@@ -24,9 +24,7 @@ from telethon.tl.functions.channels import (
     GetFullChannelRequest,
     LeaveChannelRequest)
 from telethon.tl import functions
-from telethon.tl.functions.messages import (
-    ImportChatInviteReques,
-    GetFullChatRequest)
+from telethon.tl.functions.messages import GetFullChatRequest
 from telethon.errors import (
     ChannelInvalidError,
     ChannelPrivateError,
@@ -78,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot starting...")
+    print("bot v2.0 is starting...")
     print("")
     if smex:
         session_name = str(smex)
