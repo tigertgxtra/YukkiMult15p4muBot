@@ -77,6 +77,9 @@ async def start_yukki():
     global cdk
     global ddk
     global edk
+
+    print("bot starting...")
+    print("")
     if smex:
         session_name = str(smex)
         print("String 1 Found")
@@ -637,7 +640,7 @@ async def scrapmem(e):
 @ddk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
 # @register(outgoing=True, pattern=r"^\.addmemb$")
 async def admem(e):
-	if e.sender_id in SMEX_USERS:
+    if e.sender_id in SMEX_USERS:
         text = "`Proses Menambahkan 0 Member...`"
         event = await e.reply(text, parse_mode=None, link_preview=None )
         chat = await e.get_chat()
