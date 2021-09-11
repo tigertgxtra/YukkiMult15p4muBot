@@ -76,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.4 is starting...")
+    print("bot v2.0.5 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -612,16 +612,16 @@ async def spam(e):
 async def scrapmem(event):
     if event.sender_id in SMEX_USERS:
         text = "`Mohon tunggu...`"
-        await event.reply(text, parse_mode=None, link_preview=None )
-        event.client
-        members = await event.client.get_participants(chat, aggressive=True)
+        y = await event.reply(text, parse_mode=None, link_preview=None )
+        client = event.client
+        members = await client.get_participants(y, aggressive=True)
 
         with open("members.csv", "w", encoding="UTF-8") as f:
             writer = csv.writer(f, delimiter=",", lineterminator="\n")
             writer.writerow(["user_id", "hash"])
             for member in members:
                 writer.writerow([member.id, member.access_hash])
-        await event.edit("`Berhasil Mengumpulkan Member..`")
+        await event.edit(y, "`Berhasil Mengumpulkan Member..`")
 
 
 
@@ -641,9 +641,9 @@ async def scrapmem(event):
 async def admem(event):
     if event.sender_id in SMEX_USERS:
         text = "`Proses Menambahkan 0 Member...`"
-        await event.reply(text, parse_mode=None, link_preview=None )
+        x = await event.reply(text, parse_mode=None, link_preview=None )
         chat = await event.get_chat()
-        event.client
+        client = event.client
         users = []
         with open("members.csv", encoding="UTF-8") as f:
             rows = csv.reader(f, delimiter=",", lineterminator="\n")
@@ -655,13 +655,13 @@ async def admem(event):
         for user in users:
             n += 1
             if n % 10 == 0:
-                await event.edit(f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
+                await event.edit(x, f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
                 await asyncio.sleep(900)
             try:
                 userin = InputPeerUser(user['id'], user['hash'])
                 await event.client(InviteToChannelRequest(chat, [userin]))
                 await asyncio.sleep(random.randrange(5, 7))
-                await event.edit(f"`Prosess Menambahkan {n} Member...`")
+                await event.edit(x, f"`Prosess Menambahkan {n} Member...`")
             except TypeError:
                 n -= 1
                 continue
@@ -956,7 +956,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.4 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.5 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
