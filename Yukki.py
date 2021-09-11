@@ -76,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0 is starting...")
+    print("bot v2.0.1 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -956,7 +956,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Multi Spam Bot Started Sucessfully.")
+print("SMEX! Yukki Mult1 Sp4mX Bot v.2.0.1 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
