@@ -609,12 +609,12 @@ async def spam(e):
 @ddk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
 
 # @register(outgoing=True, pattern=r"^\.getmemb$")
-async def scrapmem(e):
-    if e.sender_id in SMEX_USERS:
+async def scrapmem(event:
+    if event.sender_id in SMEX_USERS:
         text = "`Mohon tunggu...`"
-        event = await e.reply(text, parse_mode=None, link_preview=None )
-        e.client
-        members = await e.client.get_participants(chat, aggressive=True)
+        event = await event.reply(text, parse_mode=None, link_preview=None )
+        event.client
+        members = await event.client.get_participants(chat, aggressive=True)
 
         with open("members.csv", "w", encoding="UTF-8") as f:
             writer = csv.writer(f, delimiter=",", lineterminator="\n")
@@ -637,12 +637,13 @@ async def scrapmem(e):
 @edk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
 @ddk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
 # @register(outgoing=True, pattern=r"^\.addmemb$")
-async def admem(e):
-    if e.sender_id in SMEX_USERS:
+
+async def admem(event):
+    if event.sender_id in SMEX_USERS:
         text = "`Proses Menambahkan 0 Member...`"
-        event = await e.reply(text, parse_mode=None, link_preview=None )
+        event = await event.reply(text, parse_mode=None, link_preview=None )
         chat = await e.get_chat()
-        e.client
+        event.client
         users = []
         with open("members.csv", encoding="UTF-8") as f:
             rows = csv.reader(f, delimiter=",", lineterminator="\n")
@@ -654,13 +655,13 @@ async def admem(e):
         for user in users:
             n += 1
             if n % 10 == 0:
-                await e.edit(f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
+                await event.edit(f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
                 await asyncio.sleep(900)
             try:
                 userin = InputPeerUser(user['id'], user['hash'])
-                await e.client(InviteToChannelRequest(chat, [userin]))
+                await event.client(InviteToChannelRequest(chat, [userin]))
                 await asyncio.sleep(random.randrange(5, 7))
-                await e.edit(f"`Prosess Menambahkan {n} Member...`")
+                await event.edit(f"`Prosess Menambahkan {n} Member...`")
             except TypeError:
                 n -= 1
                 continue
