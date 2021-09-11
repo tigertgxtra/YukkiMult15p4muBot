@@ -76,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.5 is starting...")
+    print("bot v2.0.6 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -611,8 +611,8 @@ async def spam(e):
 # @register(outgoing=True, pattern=r"^\.getmemb$")
 async def scrapmem(event):
     if event.sender_id in SMEX_USERS:
-        text = "`Mohon tunggu...`"
-        y = await event.reply(text, parse_mode=None, link_preview=None )
+        # text = "`Mohon tunggu...`"
+        y = await eor("`Mohon tunggu...`" )
         client = event.client
         members = await client.get_participants(y, aggressive=True)
 
@@ -621,7 +621,7 @@ async def scrapmem(event):
             writer.writerow(["user_id", "hash"])
             for member in members:
                 writer.writerow([member.id, member.access_hash])
-        await event.edit(y, "`Berhasil Mengumpulkan Member..`")
+        await eor(y, "`Berhasil Mengumpulkan Member..`")
 
 
 
@@ -640,8 +640,8 @@ async def scrapmem(event):
 
 async def admem(event):
     if event.sender_id in SMEX_USERS:
-        text = "`Proses Menambahkan 0 Member...`"
-        x = await event.reply(text, parse_mode=None, link_preview=None )
+        # text = "`Proses Menambahkan 0 Member...`"
+        x = await eor("`Proses Menambahkan 0 Member...`")
         chat = await event.get_chat()
         client = event.client
         users = []
@@ -661,7 +661,7 @@ async def admem(event):
                 userin = InputPeerUser(user['id'], user['hash'])
                 await event.client(InviteToChannelRequest(chat, [userin]))
                 await asyncio.sleep(random.randrange(5, 7))
-                await event.edit(x, f"`Prosess Menambahkan {n} Member...`")
+                await eor(x, f"`Prosess Menambahkan {n} Member...`")
             except TypeError:
                 n -= 1
                 continue
@@ -956,7 +956,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.5 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.6 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
