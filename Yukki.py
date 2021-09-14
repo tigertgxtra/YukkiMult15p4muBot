@@ -30,6 +30,16 @@ from telethon.errors import (
     ChannelPrivateError,
     ChannelPublicGroupNaError)
 from Utils import RAID, RRAID
+import html
+
+from telethon.tl.functions.account import UpdateProfileRequest
+from telethon.tl.functions.photos import (DeletePhotosRequest,
+                                          UploadProfilePhotoRequest)
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
+
+from . import *
+
 
 
 a = API_ID
@@ -76,7 +86,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.10 is starting...")
+    print("bot v2.0.11 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -904,6 +914,159 @@ async def purgeme(delme):
         i = 1
         await smsg.delete()
         
+
+
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
+
+# @ddk.on(events.NewMessage(incoming=True, pattern=r"\.delayspam"))
+# @ultroid_cmd(pattern="clone ?(.*)")
+async def _(event):
+    if event.sender_id in SMEX_USERS:
+        eve = await eor(event, "`Processing...`")
+        reply_message = await event.get_reply_message()
+        whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
+        if whoiam.about:
+            mybio = str(ultroid_bot.me.id) + "01"
+            udB.set(f"{mybio}", whoiam.about)  # saving bio for revert
+        udB.set(f"{ultroid_bot.uid}02", whoiam.user.first_name)
+        if whoiam.user.last_name:
+            udB.set(f"{ultroid_bot.uid}03", whoiam.user.last_name)
+        replied_user, error_i_a = await get_full_user(event)
+        if replied_user is None:
+            await eve.edit(str(error_i_a))
+            return
+        user_id = replied_user.user.id
+        profile_pic = await event.client.download_profile_photo(user_id)
+        first_name = html.escape(replied_user.user.first_name)
+        if first_name is not None:
+            first_name = first_name.replace("\u2060", "")
+        last_name = replied_user.user.last_name
+        if last_name is not None:
+            last_name = html.escape(last_name)
+            last_name = last_name.replace("\u2060", "")
+        if last_name is None:
+            last_name = "⁪⁬⁮⁮⁮"
+        user_bio = replied_user.about
+        if user_bio is not None:
+            user_bio = replied_user.about
+        await event.client(UpdateProfileRequest(first_name=first_name))
+        await event.client(UpdateProfileRequest(last_name=last_name))
+        await event.client(UpdateProfileRequest(about=user_bio))
+        pfile = await event.client.upload_file(profile_pic)  # pylint:disable=E060
+        await event.client(UploadProfilePhotoRequest(pfile))
+        await eve.delete()
+        await event.client.send_message(
+            event.chat_id, f"**I am `{first_name}` from now...**", reply_to=reply_message
+        )
+
+
+
+
+
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
+
+# @ultroid_cmd(pattern="revert$")
+async def _(event):
+    if event.sender_id in SMEX_USERS:
+        name = OWNER_NAME
+        ok = ""
+        mybio = str(ultroid_bot.me.id) + "01"
+        bio = "Error : Bio Lost"
+        chc = udB.get(mybio)
+        if chc:
+            bio = chc
+        fname = udB.get(f"{ultroid_bot.uid}02")
+        lname = udB.get(f"{ultroid_bot.uid}03")
+        if fname:
+            name = fname
+        if lname:
+            ok = lname
+        n = 1
+        client = event.client
+        await client(
+            DeletePhotosRequest(await event.client.get_profile_photos("me", limit=n))
+        )
+        await client(UpdateProfileRequest(about=bio))
+        await client(UpdateProfileRequest(first_name=name))
+        await client(UpdateProfileRequest(last_name=ok))
+        await eor(event, "Succesfully reverted to your account back !")
+        udB.delete(f"{ultroid_bot.uid}01")
+        udB.delete(f"{ultroid_bot.uid}02")
+        udB.delete(f"{ultroid_bot.uid}03")
+
+
+async def get_full_user(event):
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        if previous_message.forward:
+            replied_user = await event.client(
+                GetFullUserRequest(
+                    previous_message.forward.sender_id
+                    or previous_message.forward.channel_id
+                )
+            )
+            return replied_user, None
+        else:
+            replied_user = await event.client(
+                GetFullUserRequest(previous_message.sender_id)
+            )
+            return replied_user, None
+    else:
+        input_str = None
+        try:
+            input_str = event.pattern_match.group(1)
+        except IndexError as e:
+            return None, e
+        if event.message.entities is not None:
+            mention_entity = event.message.entities
+            probable_user_mention_entity = mention_entity[0]
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                user_id = probable_user_mention_entity.user_id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            else:
+                try:
+                    user_object = await event.client.get_entity(input_str)
+                    user_id = user_object.id
+                    replied_user = await event.client(GetFullUserRequest(user_id))
+                    return replied_user, None
+                except Exception as e:
+                    return None, e
+        elif event.is_private:
+            try:
+                user_id = event.chat_id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            except Exception as e:
+                return None, e
+        else:
+            try:
+                user_object = await event.client.get_entity(int(input_str))
+                user_id = user_object.id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            except Exception as e:
+                return None, e
+
+
         
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.restart"))
@@ -997,7 +1160,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.10 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
