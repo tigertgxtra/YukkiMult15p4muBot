@@ -76,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.10 is starting...")
+    print("bot v2.0.10.1 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -879,30 +879,33 @@ async def purgeme(delme):
     usage = "𝗠𝗼𝗱𝘂𝗹𝗲 𝗡𝗮𝗺𝗲 = 𝙋𝙪𝙧𝙜𝙚𝙢𝙚\n\nCommand:\n\n.purgeme <count> | delete x count of your latest message."
     if delme.sender_id in SMEX_USERS:
         """ For .purgeme, delete x count of your latest message."""
-        message = delme.text
-        count = int(message[9:])
-        i = 1
+        if message = delme.text
+            count = int(message[9:])
+            i = 1
 
-        async for message in delme.client.iter_messages(delme.chat_id,
+            async for message in delme.client.iter_messages(delme.chat_id,
                                                     from_user='me'):
-            if i > count + 1:
-                break
-            i = i + 1
-            await message.delete()
+                if i > count + 1:
+                    break
+                i = i + 1
+                await message.delete()
 
-        smsg = await delme.client.send_message(
+            smsg = await delme.client.send_message(
             delme.chat_id,
-            "`Purge complete!` Purged " + str(count) + " messages.",
-        )
-        """
-        if BOTLOG:
-            await delme.client.send_message(
-                BOTLOG_CHATID,
-                "#PURGEME \nPurge of " + str(count) + " messages done successfully.")
-        """
-        await sleep(2)
-        i = 1
-        await smsg.delete()
+                "`Purge complete!` Purged " + str(count) + " messages.",
+            )
+            """
+            if BOTLOG:
+                await delme.client.send_message(
+                    BOTLOG_CHATID,
+                    "#PURGEME \nPurge of " + str(count) + " messages done successfully.")
+            """
+            await sleep(2)
+            i = 1
+            await smsg.delete()
+        else:
+            await delme.reply(usage, parse_mode=None, link_preview=None ) 
+
         
         
 
@@ -997,7 +1000,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.10 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.10.1 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
