@@ -30,7 +30,7 @@ from telethon.errors import (
     ChannelPrivateError,
     ChannelPublicGroupNaError)
 from Utils import RAID, RRAID
-# ========== bot v2.0.7
+
 
 a = API_ID
 b = API_HASH
@@ -877,7 +877,7 @@ async def ping(e):
 
 async def purgeme(delme):
     if delme.sender_id in SMEX_USERS:
-    """ For .purgeme, delete x count of your latest message."""
+        """ For .purgeme, delete x count of your latest message."""
         message = delme.text
         count = int(message[10:])
         i = 1
