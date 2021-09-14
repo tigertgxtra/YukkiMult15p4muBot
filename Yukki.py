@@ -76,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.7 is starting...")
+    print("bot v2.0.8 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -879,7 +879,7 @@ async def purgeme(delme):
     if delme.sender_id in SMEX_USERS:
         """ For .purgeme, delete x count of your latest message."""
         message = delme.text
-        count = int(message[10:])
+        count = int(message[9:])
         i = 1
 
         async for message in delme.client.iter_messages(delme.chat_id,
@@ -996,7 +996,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.7 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.8 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
