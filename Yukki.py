@@ -879,8 +879,8 @@ async def purgeme(delme):
     usage = "𝗠𝗼𝗱𝘂𝗹𝗲 𝗡𝗮𝗺𝗲 = 𝙋𝙪𝙧𝙜𝙚𝙢𝙚\n\nCommand:\n\n.purgeme <count> | delete x count of your latest message."
     if delme.sender_id in SMEX_USERS:
         """ For .purgeme, delete x count of your latest message."""
-        if message = delme.text
-            count = int(message[9:])
+        message = delme.text
+        if count = int(message[9:])
             i = 1
 
             async for message in delme.client.iter_messages(delme.chat_id,
