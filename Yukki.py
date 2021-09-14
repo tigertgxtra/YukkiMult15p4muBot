@@ -76,7 +76,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.8 is starting...")
+    print("bot v2.0.9 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -86,8 +86,8 @@ async def start_yukki():
             print("Booting Up The Client 1")
             await idk.start()
             botme = await idk.get_me()
-            await idk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await idk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await idk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await idk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
         except Exception as e:
@@ -110,8 +110,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 2")
             await ydk.start()
-            await ydk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await ydk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await ydk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await ydk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await ydk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -135,8 +135,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 3")
             await  wdk.start()
-            await wdk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await wdk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await wdk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await wdk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await wdk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -160,8 +160,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 4")
             await hdk.start()
-            await hdk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await hdk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await hdk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await hdk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await hdk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -185,8 +185,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 5")
             await sdk.start()
-            await sdk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await sdk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await sdk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await sdk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await sdk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -210,8 +210,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 6")
             await adk.start()
-            await adk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await adk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await adk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await adk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await adk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -235,8 +235,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 7")
             await bdk.start()
-            await bdk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await bdk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await bdk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await bdk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await bdk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -261,8 +261,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 8")
             await cdk.start()
-            await cdk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await cdk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await cdk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await cdk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await cdk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -286,8 +286,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 9")
             await ddk.start()
-            await ddk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await ddk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await ddk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await ddk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await ddk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -312,8 +312,8 @@ async def start_yukki():
         try:
             print("Booting Up The Client 10")
             await edk.start()
-            await edk(functions.channels.JoinChannelRequest(channel="@OfficialYukki"))
-            await edk(functions.channels.JoinChannelRequest(channel="@OfficialYukkiSupport"))
+            await edk(functions.channels.JoinChannelRequest(channel="@CariTemanLink"))
+            await edk(functions.channels.JoinChannelRequest(channel="@AlphaXProject"))
             botme = await edk.get_me()
             botid = telethon.utils.get_peer_id(botme)
             SMEX_USERS.append(botid)
@@ -996,7 +996,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.8 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.9 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
