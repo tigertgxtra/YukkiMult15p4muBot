@@ -1,4 +1,4 @@
-# v2.0.11 beta10.8
+# v2.0.11 beta10.9
 
 import os
 import sys
@@ -90,7 +90,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v2.0.11 beta10.8 is starting...")
+    print("bot v2.0.11 beta10.9 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1134,21 +1134,21 @@ async def dm(e):
         try:
             chat_id = await get_user_id(c[0])
         except Exception as ex:
-            return await e.reply(e, "`" + str(ex) + "`")
+            return await e.reply("`" + str(ex) + "`")
         msg = ""
         masg = await e.get_reply_message()
         if e.reply_to_msg_id:
             await e.client.send_message(chat_id, masg)
-            await e.reply(e, "`⚜️Message Delivered!`")
+            await e.reply("`⚜️Message Delivered!`")
         for i in c[1:]:
             msg += i + " "
         if msg == "":
             return
         try:
             await e.client.send_message(chat_id, msg)
-            await e.reply(e, "`⚜️Message Delivered!⚜️`")
+            await e.reply("`⚜️Message Delivered!⚜️`")
         except BaseException:
-            await e.reply(e, f"Read Usage : `.help dm`")
+            await e.reply(f"Read Usage : `.help dm`")
 
 
 
@@ -1256,7 +1256,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.8</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.9</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1273,7 +1273,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.8 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.9 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
