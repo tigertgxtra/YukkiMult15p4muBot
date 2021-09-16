@@ -1,4 +1,4 @@
-from . import *
+from Yukki import *
 
 @wdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
 @hdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
