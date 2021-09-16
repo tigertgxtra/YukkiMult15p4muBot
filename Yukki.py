@@ -1,4 +1,4 @@
-# v2.0.11 beta8
+# v2.0.11 beta9
 
 import os
 import sys
@@ -88,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta8 is starting...")
+    print("bot v2.0.11 beta9 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -624,7 +624,7 @@ async def spam(e):
 async def scrapmem(event):
     if event.sender_id in SMEX_USERS:
         # text = "`Mohon tunggu...`"
-        y = await even.reply("`Mohon tunggu...`" )
+        y = await event.reply("`Mohon tunggu...`" )
         client = event.client
         members = await client.get_participants(y, aggressive=True)
 
@@ -653,7 +653,7 @@ async def scrapmem(event):
 async def admem(event):
     if event.sender_id in SMEX_USERS:
         # text = "`Proses Menambahkan 0 Member...`"
-        x = await even.reply("`Proses Menambahkan 0 Member...`")
+        x = await event.reply("`Proses Menambahkan 0 Member...`")
         chat = await event.get_chat()
         client = event.client
         users = []
@@ -1198,7 +1198,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta8 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta9 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
