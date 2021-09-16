@@ -40,6 +40,16 @@ from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhoto
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
+from pyUltroid.functions.all import (
+    bash,
+    downloader,
+    get_user_id,
+    get_videos_link,
+    inline_mention,
+    mediainfo,
+    time_formatter,
+)
+
 # TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
 
