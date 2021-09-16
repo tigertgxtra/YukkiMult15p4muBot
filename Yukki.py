@@ -1071,6 +1071,39 @@ async def get_full_user(event):
                 return None, e
 
 
+# ========[name changer]
+
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.setname ?((.|//)*)"))
+
+# @ultroid_cmd(pattern="setname ?((.|//)*)", fullsudo=True)
+
+async def _(ult):
+    ok = await eor(ult, "...")
+    names = ult.pattern_match.group(1)
+    first_name = names
+    last_name = ""
+    if "//" in names:
+        first_name, last_name = names.split("//", 1)
+    try:
+        await ult.client(
+            UpdateProfileRequest(
+                first_name=first_name,
+                last_name=last_name,
+            ),
+        )
+        await eod(ok, f"Name changed to `{names}`")
+    except Exception as ex:
+        await eod(ok, "Error occured.\n`{}`".format(str(ex)))
+
         
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.restart"))
