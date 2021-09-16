@@ -1,4 +1,4 @@
-# v2.0.11 beta9
+# v2.0.11 beta10
 
 import os
 import sys
@@ -88,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta9 is starting...")
+    print("bot v2.0.11 beta10 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -624,9 +624,10 @@ async def spam(e):
 async def scrapmem(event):
     if event.sender_id in SMEX_USERS:
         # text = "`Mohon tunggu...`"
+        chat = event.chat_id
         y = await event.reply("`Mohon tunggu...`" )
         client = event.client
-        members = await client.get_participants(y, aggressive=True)
+        members = await client.get_participants(chat, aggressive=True)
 
         with open("members.csv", "w", encoding="UTF-8") as f:
             writer = csv.writer(f, delimiter=",", lineterminator="\n")
@@ -931,7 +932,7 @@ async def purgeme(delme):
 @edk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
 @ddk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
 
-# @ddk.on(events.NewMessage(incoming=True, pattern=r"\.delayspam"))
+
 # @ultroid_cmd(pattern="clone ?(.*)")
 async def _(event):
     if event.sender_id in SMEX_USERS:
@@ -1198,7 +1199,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta9 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
