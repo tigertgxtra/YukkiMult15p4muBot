@@ -1,4 +1,4 @@
-# v2.0.11 beta10.5
+# v2.0.11 beta10.6
 
 import os
 import sys
@@ -40,15 +40,6 @@ from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhoto
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from pyUltroid.functions.all import (
-    bash,
-    downloader,
-    get_user_id,
-    get_videos_link,
-    inline_mention,
-    mediainfo,
-    time_formatter,
-)
 
 # TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
@@ -79,7 +70,6 @@ cdk = ""
 edk = ""
 ddk = ""
 
-bot_version = "v2.0.11 beta10.5" # bot version
 
 que = {}
 
@@ -98,9 +88,9 @@ async def start_yukki():
     global cdk
     global ddk
     global edk
-    global bot_version
 
-    print("bot v2.0.11 beta10.5 is starting...")
+
+    print("bot v2.0.11 beta10.6 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1118,40 +1108,6 @@ async def setname(event):
         except Exception as ex:
             await ok.edit("Error occured.\n`{}`".format(str(ex)))
 
-# profile pic
-
-@idk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@ydk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@wdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@hdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@sdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@adk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@bdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@cdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@edk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-@ddk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
-
-# @ultroid_cmd(pattern="setpic$", fullsudo=True)
-
-async def setpic(event):
-    if event.sender_id in SMEX_USERS:
-        if not event.is_reply:
-            return await event.reply(f"`Reply to a Media..`", time=5)
-        reply_message = await event.get_reply_message()
-        ok = await event.reply(f"...")
-        replfile = await reply_message.download_media()
-        file = await event.client.upload_file(replfile)
-        mediain = mediainfo(reply_message.media)
-        try:
-            if "pic" in mediain:
-                await event.client(UploadProfilePhotoRequest(file))
-            else:
-                await event.client(UploadProfilePhotoRequest(video=file))
-            await ok.edit(f"`My Profile Photo has Successfully Changed !`")
-        except Exception as ex:
-            await ok.edit("Error occured.\n`{}`".format(str(ex)))
-        os.remove(replfile)
-
         
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.restart"))
@@ -1258,7 +1214,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.5</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.6</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1275,7 +1231,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.5 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.6 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
