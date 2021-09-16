@@ -1,4 +1,4 @@
-# v2.0.11 beta10.12
+# v2.0.11 beta11
 
 import os
 import sys
@@ -90,7 +90,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v2.0.11 beta10.12 is starting...")
+    print("bot v2.0.11 beta11 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1252,10 +1252,11 @@ async def help(e):
 <code>.rabsen</code>
 <code>.setname</code>
 <code>.setpic</code>
+<code>.dm</code>
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.12</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta11</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1272,7 +1273,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.12 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta11 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
