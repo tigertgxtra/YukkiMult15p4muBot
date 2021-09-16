@@ -1,3 +1,12 @@
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
+
 async def pinx(e):
     if e.sender_id in SMEX_USERS:
         start = datetime.now()
