@@ -1,4 +1,4 @@
-# v2.0.11 beta6
+# v2.0.11 beta7
 
 import os
 import sys
@@ -88,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta6 is starting...")
+    print("bot v2.0.11 beta7 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -633,7 +633,7 @@ async def scrapmem(event):
             writer.writerow(["user_id", "hash"])
             for member in members:
                 writer.writerow([member.id, member.access_hash])
-        await even.edit(y, "`Berhasil Mengumpulkan Member..`")
+        await y.edit(f"`Berhasil Mengumpulkan Member..`")
 
 
 
@@ -667,13 +667,13 @@ async def admem(event):
         for user in users:
             n += 1
             if n % 10 == 0:
-                await event.edit(x, f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
+                await x.edit(f"`Mencapai 10 anggota, tunggu selama {900/60} menit`")
                 await asyncio.sleep(900)
             try:
                 userin = InputPeerUser(user['id'], user['hash'])
                 await event.client(InviteToChannelRequest(chat, [userin]))
                 await asyncio.sleep(random.randrange(5, 7))
-                await event.edit(x, f"`Prosess Menambahkan {n} Member...`")
+                await x.edit(f"`Prosess Menambahkan {n} Member...`")
             except TypeError:
                 n -= 1
                 continue
@@ -1198,7 +1198,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta6 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta7 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
