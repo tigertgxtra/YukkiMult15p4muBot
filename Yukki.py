@@ -1,4 +1,4 @@
-# v2.0.11 beta4
+# v2.0.11 beta5
 
 import os
 import sys
@@ -88,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta4 is starting...")
+    print("bot v2.0.11 beta5 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1086,9 +1086,9 @@ async def get_full_user(event):
 
 # @ultroid_cmd(pattern="setname ?((.|//)*)", fullsudo=True)
 
-async def _(ult):
+async def setname(event):
     if event.sender_id in SMEX_USERS:
-        ok = await event.reply(ult, "...")
+        ok = await event.reply("...")
         names = ult.pattern_match.group(1)
         first_name = names
         last_name = ""
@@ -1101,7 +1101,7 @@ async def _(ult):
                     last_name=last_name,
                 ),
             )
-            await eod(ok, f"Name changed to `{names}`")
+            await event.edit(ok, f"Name changed to `{names}`")
         except Exception as ex:
             await event.edit(ok, "Error occured.\n`{}`".format(str(ex)))
 
@@ -1198,7 +1198,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta4 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta5 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
