@@ -1,4 +1,4 @@
-# v2.0.11 beta7
+# v2.0.11 beta8
 
 import os
 import sys
@@ -88,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta7 is starting...")
+    print("bot v2.0.11 beta8 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -609,16 +609,16 @@ async def spam(e):
 
 
 
-@idk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@ydk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@wdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@hdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@sdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@adk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@bdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@cdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@edk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
-@ddk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb$"))
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.getmemb"))
 
 # @register(outgoing=True, pattern=r"^\.getmemb$")
 async def scrapmem(event):
@@ -638,16 +638,16 @@ async def scrapmem(event):
 
 
 
-@idk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@ydk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@wdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@hdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@sdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@adk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@bdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@cdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@edk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
-@ddk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb$"))
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.addmemb"))
 # @register(outgoing=True, pattern=r"^\.addmemb$")
 
 async def admem(event):
@@ -1198,7 +1198,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta7 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta8 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
