@@ -1,3 +1,5 @@
+# v2.0.11 beta2
+
 import os
 import sys
 import asyncio
@@ -34,8 +36,7 @@ from Pong import *
 import html
 
 from telethon.tl.functions.account import UpdateProfileRequest
-from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          UploadProfilePhotoRequest)
+from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhotoRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
@@ -87,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 is starting...")
+    print("bot v2.0.11 beta2 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1163,7 +1164,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta2 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
