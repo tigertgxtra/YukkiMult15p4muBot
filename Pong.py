@@ -1,3 +1,5 @@
+from . import *
+
 @wdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
 @hdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
 @sdk.on(events.NewMessage(incoming=True, pattern=r"\.pong"))
