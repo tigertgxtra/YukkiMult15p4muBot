@@ -1,4 +1,4 @@
-# v2.0.11 beta10.11
+# v2.0.11 beta10.12
 
 import os
 import sys
@@ -90,7 +90,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v2.0.11 beta10.11 is starting...")
+    print("bot v2.0.11 beta10.12 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1111,45 +1111,44 @@ async def setname(event):
 
 # ===== DM ========
 
-@idk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@ydk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@wdk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@hdk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@sdk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@adk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@bdk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@cdk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@edk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
-@ddk.on(events.NewMessage(incoming=True, pattern=r"\.dm ?(.*)"))
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
 
-async def dm(event):
+# @bot.on(geezbot_cmd(outgoing=True, pattern="dm(?: |$)(.*)"))
+async def remoteaccess(event):
     if event.sender_id in SMEX_USERS:
-        # if not e.out and not is_fullsudo(e.sender_id):
-            # return await e.reply(e, "`This Command is Full Sudo Restricted..`")
-        if len(event.text) > 3:
-            if not event.text[3] == " ":  # weird fix
-                return
-        d = event.pattern_match.group(1)
-        c = event.split(" ")
+        p = event.pattern_match.group(1)
+        m = p.split(" ")
+
+        chat_id = m[0]
         try:
-            chat_id = await get_user_id(c[0])
-        except Exception as ex:
-            return await even.reply(event, "`" + str(ex) + "`")
+            chat_id = int(chat_id)
+        except BaseException:
+
+            pass
+
         msg = ""
-        masg = await event.get_reply_message()
+        mssg = await event.get_reply_message()
         if event.reply_to_msg_id:
-            await event.client.send_message(chat_id, masg)
-            await event.reply(event, "`⚜️Message Delivered!`")
-        for i in c[1:]:
+            await event.client.send_message(chat_id, mssg)
+            await event.reply("`Success Mengirim Pesan Anda.`")
+        for i in m[1:]:
             msg += i + " "
         if msg == "":
             return
         try:
             await event.client.send_message(chat_id, msg)
-            await event.reply(event, "`⚜️Message Delivered!⚜️`")
+            await event.reply("`Success Mengirim Pesan Anda.`")
         except BaseException:
-            await event.reply(event, f"Read Usage : `.help dm`")
-
+            await event.reply("**Terjadi Error. Gagal Mengirim Pesan.**")
 
 
 # restart         
@@ -1256,7 +1255,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.11</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.12</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1273,7 +1272,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.11 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.12 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
