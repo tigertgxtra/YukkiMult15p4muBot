@@ -30,6 +30,7 @@ from telethon.errors import (
     ChannelPrivateError,
     ChannelPublicGroupNaError)
 from Utils import RAID, RRAID
+from Pong import *
 import html
 
 from telethon.tl.functions.account import UpdateProfileRequest
@@ -869,6 +870,18 @@ async def ping(e):
         end = datetime.now()
         ms = (end-start).microseconds / 1000
         await event.edit(f"🤖 𝗣𝗼𝗻𝗴!\n`{ms}` 𝗺𝘀")
+
+# ======PONG
+
+
+async def pinx(e):
+    if e.sender_id in SMEX_USERS:
+        start = datetime.now()
+        text = "Pinx!"
+        event = await e.reply(text, parse_mode=None, link_preview=None )
+        end = datetime.now()
+        ms = (end-start).microseconds / 1000
+        await event.edit(f"🤖 pinx!!!\n`{ms}` 𝗺𝘀")
 
 
 # ======PURGEME
