@@ -1,4 +1,4 @@
-# v2.0.11 beta10
+# v2.0.11 beta10.5
 
 import os
 import sys
@@ -40,7 +40,7 @@ from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhoto
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
+# TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
 
 
@@ -69,7 +69,7 @@ cdk = ""
 edk = ""
 ddk = ""
 
-bot_version = "v2.0.11 beta10.3" # bot version
+bot_version = "v2.0.11 beta10.5" # bot version
 
 que = {}
 
@@ -90,7 +90,7 @@ async def start_yukki():
     global edk
     global bot_version
 
-    print("bot {bot_version} is starting...")
+    print("bot v2.0.11 beta10.5 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1137,9 +1137,9 @@ async def setpic(event):
                 await event.client(UploadProfilePhotoRequest(file))
             else:
                 await event.client(UploadProfilePhotoRequest(video=file))
-            await event.edit(ok, f"`My Profile Photo has Successfully Changed !`")
+            await ok.edit(f"`My Profile Photo has Successfully Changed !`")
         except Exception as ex:
-            await event.edit(ok, "Error occured.\n`{}`".format(str(ex)))
+            await ok.edit("Error occured.\n`{}`".format(str(ex)))
         os.remove(replfile)
 
         
@@ -1248,7 +1248,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>{bot_version}</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta10.5</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1265,7 +1265,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot {bot_version} Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10.5 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
