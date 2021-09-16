@@ -69,7 +69,7 @@ cdk = ""
 edk = ""
 ddk = ""
 
-version = "v2.0.11 beta10.2" # bot version
+bot_version = "v2.0.11 beta10.3" # bot version
 
 que = {}
 
@@ -88,8 +88,9 @@ async def start_yukki():
     global cdk
     global ddk
     global edk
+    global bot_version
 
-    print("bot {version} is starting...")
+    print("bot {bot_version} is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1247,7 +1248,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>{version}</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>{bot_version}</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1264,7 +1265,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot {version} Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot {bot_version} Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
