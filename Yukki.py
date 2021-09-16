@@ -1,4 +1,4 @@
-# v2.0.11 beta5
+# v2.0.11 beta6
 
 import os
 import sys
@@ -88,7 +88,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta5 is starting...")
+    print("bot v2.0.11 beta6 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1101,9 +1101,9 @@ async def setname(event):
                     last_name=last_name,
                 ),
             )
-            await event.edit(ok, f"Name changed to `{names}`")
+            await ok.edit(f"Name changed to `{names}`")
         except Exception as ex:
-            await event.edit(ok, "Error occured.\n`{}`".format(str(ex)))
+            await ok.edit("Error occured.\n`{}`".format(str(ex)))
 
         
 
@@ -1198,7 +1198,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta5 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta6 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
