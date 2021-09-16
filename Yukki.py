@@ -1138,7 +1138,7 @@ async def setpic(event):
                 await event.client(UploadProfilePhotoRequest(video=file))
             await event.edit(ok, f"`My Profile Photo has Successfully Changed !`")
         except Exception as ex:
-            await event.edit(ok, f"Error occured.\n`{}`".format(str(ex)))
+            await event.edit(ok, "Error occured.\n`{}`".format(str(ex)))
         os.remove(replfile)
 
         
