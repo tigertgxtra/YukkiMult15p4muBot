@@ -69,7 +69,7 @@ cdk = ""
 edk = ""
 ddk = ""
 
-version = "v2.0.11 beta10.1" # bot version
+version = "v2.0.11 beta10.2" # bot version
 
 que = {}
 
@@ -1105,7 +1105,7 @@ async def setname(event):
             )
             await ok.edit(f"Name changed to `{names}`")
         except Exception as ex:
-            await ok.edit(f"Error occured.\n`{}`".format(str(ex)))
+            await ok.edit("Error occured.\n`{}`".format(str(ex)))
 
 # profile pic
 
@@ -1240,11 +1240,10 @@ async def help(e):
 <code>.dreplyraid</code>
 
 ⚔️ 𝙓𝙩𝙧𝙖 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:
-<code>.absen</code>
-<code>.pinx</code>
 <code>.purgeme</code>
 <code>.rabsen</code>
 <code>.setname</code>
+<code>.setpic</code>
 
 For more help regarding usage of plugins type plugins name
 
