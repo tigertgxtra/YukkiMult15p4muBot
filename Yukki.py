@@ -40,7 +40,7 @@ from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhoto
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-
+TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
 
 
@@ -69,6 +69,7 @@ cdk = ""
 edk = ""
 ddk = ""
 
+version = "v2.0.11 beta10.1" # bot version
 
 que = {}
 
@@ -88,7 +89,7 @@ async def start_yukki():
     global ddk
     global edk
 
-    print("bot v2.0.11 beta10 is starting...")
+    print("bot {version} is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1104,7 +1105,41 @@ async def setname(event):
             )
             await ok.edit(f"Name changed to `{names}`")
         except Exception as ex:
-            await ok.edit("Error occured.\n`{}`".format(str(ex)))
+            await ok.edit(f"Error occured.\n`{}`".format(str(ex)))
+
+# profile pic
+
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.setpic$"))
+
+# @ultroid_cmd(pattern="setpic$", fullsudo=True)
+
+async def setpic(event):
+    if event.sender_id in SMEX_USERS:
+        if not event.is_reply:
+            return await event.reply(f"`Reply to a Media..`", time=5)
+        reply_message = await event.get_reply_message()
+        ok = await event.reply(f"...")
+        replfile = await reply_message.download_media()
+        file = await event.client.upload_file(replfile)
+        mediain = mediainfo(reply_message.media)
+        try:
+            if "pic" in mediain:
+                await event.client(UploadProfilePhotoRequest(file))
+            else:
+                await event.client(UploadProfilePhotoRequest(video=file))
+            await event.edit(ok, f"`My Profile Photo has Successfully Changed !`")
+        except Exception as ex:
+            await event.edit(ok, f"Error occured.\n`{}`".format(str(ex)))
+        os.remove(replfile)
 
         
 
@@ -1180,10 +1215,41 @@ async def restart(e):
 @cdk.on(events.NewMessage(incoming=True, pattern=r"\.help"))
 @edk.on(events.NewMessage(incoming=True, pattern=r"\.help"))
 @ddk.on(events.NewMessage(incoming=True, pattern=r"\.help"))
+
 async def help(e):
     if e.sender_id in SMEX_USERS:
-       text = "𝗔𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀\n\n𝙐𝙩𝙞𝙡𝙨 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:\n.ping\n.restart\n.purgeme\n\n𝙐𝙨𝙚𝙧𝙗𝙤𝙩 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:\n.bio\n.join\n.pjoin\n.leave\n\n𝙎𝙥𝙖𝙢 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:\n.spam\n.delayspam\n.bigspam\n.raid\n.replyraid\n.dreplyraid\n\n\nFor more help regarding usage of plugins type plugins name"
-       await e.reply(text, parse_mode=None, link_preview=None )
+       text = """🔰 𝗔𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀
+
+🛠 𝙐𝙩𝙞𝙡𝙨 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:
+<code>.ping</code>
+<code>.restart</code>
+
+🎛 𝙐𝙨𝙚𝙧𝙗𝙤𝙩 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:
+<code>.bio</code>
+<code>.join</code>
+<code>.pjoin</code>
+<code>.leave</code>
+<code>.inviteall</code>
+
+☠️ 𝙎𝙥𝙖𝙢 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:
+<code>.spam</code>
+<code>.delayspam</code>
+<code>.bigspam</code>
+<code>.raid</code>
+<code>.replyraid</code>
+<code>.dreplyraid</code>
+
+⚔️ 𝙓𝙩𝙧𝙖 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:
+<code>.absen</code>
+<code>.pinx</code>
+<code>.purgeme</code>
+<code>.rabsen</code>
+<code>.setname</code>
+
+For more help regarding usage of plugins type plugins name
+
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>{version}</code>"""
+       await e.reply(text, parse_mode='html', link_preview=None )
 
         
 
@@ -1199,7 +1265,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta10 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot {version} Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
