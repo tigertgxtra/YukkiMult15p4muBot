@@ -1,4 +1,4 @@
-# v2.0.11 beta11
+# v2.0.11 beta11.1
 
 import os
 import sys
@@ -40,6 +40,24 @@ from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhoto
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
+from telethon.errors import ImageProcessFailedError, PhotoCropSizeSmallError
+
+from telethon.errors.rpcerrorlist import (PhotoExtInvalidError,
+                                          UsernameOccupiedError)
+
+from telethon.tl.functions.account import (UpdateProfileRequest,
+                                           UpdateUsernameRequest)
+
+from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
+
+from telethon.tl.functions.photos import (DeletePhotosRequest,
+                                          GetUserPhotosRequest,
+                                          UploadProfilePhotoRequest)
+
+from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
+from telethon.utils import get_input_location
 
 # TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
@@ -90,7 +108,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v2.0.11 beta11 is starting...")
+    print("bot v2.0.11 beta11.1 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -922,6 +940,61 @@ async def purgeme(delme):
         await smsg.delete()
         
 
+# ====================== CONSTANT ===============================
+INVALID_MEDIA = "```The extension of the media entity is invalid.```"
+PP_CHANGED = "```Profile picture changed successfully.```"
+PP_TOO_SMOL = "```This image is too small, use a bigger image.```"
+PP_ERROR = "```Failure occured while processing image.```"
+
+BIO_SUCCESS = "```Successfully edited Bio.```"
+
+NAME_OK = "```Your name was succesfully changed.```"
+USERNAME_SUCCESS = "```Your username was succesfully changed.```"
+USERNAME_TAKEN = "```This username is already taken.```"
+# ===============================================================
+
+# ==== SET PHOTO PROFIL
+
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.setpfp$"))
+
+# @bot.on(geezbot_cmd(outgoing=True, pattern="setpfp$"))
+async def set_profilepic(propic):
+    if propic.sender_id in SMEX_USERS:    
+        """ For .profilepic command, change your profile picture in Telegram. """
+        replymsg = await propic.get_reply_message()
+        photo = None
+        if replymsg.media:
+            if isinstance(replymsg.media, MessageMediaPhoto):
+                photo = await propic.client.download_media(message=replymsg.photo)
+            elif "image" in replymsg.media.document.mime_type.split('/'):
+                photo = await propic.client.download_file(replymsg.media.document)
+            else:
+                await propic.reply(INVALID_MEDIA)
+
+        if photo:
+            try:
+                await propic.client(
+                    UploadProfilePhotoRequest(await
+                                              propic.client.upload_file(photo)))
+                os.remove(photo)
+                await propic.reply(PP_CHANGED)
+            except PhotoCropSizeSmallError:
+                await propic.reply(PP_TOO_SMOL)
+            except ImageProcessFailedError:
+                await propic.reply(PP_ERROR)
+            except PhotoExtInvalidError:
+                await propic.reply(INVALID_MEDIA)
+
+
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
 @ydk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
@@ -1109,6 +1182,7 @@ async def setname(event):
             await ok.edit("Error occured.\n`{}`".format(str(ex)))
 
 
+
 # ===== DM ========
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.dm(?: |$)(.*)"))
@@ -1251,12 +1325,13 @@ async def help(e):
 <code>.purgeme</code>
 <code>.rabsen</code>
 <code>.setname</code>
-<code>.setpic</code>
+<code>.getmemb</code>
+<code>.addmemb</code>
 <code>.dm</code>
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta11</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.11 beta11.1</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1273,7 +1348,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta11 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.11 beta11.1 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
