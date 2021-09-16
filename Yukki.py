@@ -1089,13 +1089,13 @@ async def get_full_user(event):
 async def setname(event):
     if event.sender_id in SMEX_USERS:
         ok = await event.reply("...")
-        names = ult.pattern_match.group(1)
+        names = event.pattern_match.group(1)
         first_name = names
         last_name = ""
         if "//" in names:
             first_name, last_name = names.split("//", 1)
         try:
-            await ult.client(
+            await event.client(
                 UpdateProfileRequest(
                     first_name=first_name,
                     last_name=last_name,
