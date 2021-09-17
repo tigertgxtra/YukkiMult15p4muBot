@@ -1,4 +1,4 @@
-# v2.0.13 beta4
+# v3.1.1.10 beta11
 
 import os
 import sys
@@ -108,7 +108,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v2.0.13 beta4 is starting...")
+    print("bot v3.1.1.10 beta11 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1014,7 +1014,6 @@ async def set_profilepic(propic):
 async def remove_profilepic(delpfp):
     if delpfp.sender_id in SMEX_USERS:
         """ For .delpfp command, delete your current profile picture in Telegram. """
-        ok = await delpfp.reply("...")
         group = delpfp.text[8:]
         if group == 'all':
             lim = 0
@@ -1023,10 +1022,46 @@ async def remove_profilepic(delpfp):
         else:
             lim = 1
 
-        pfplist = await delpfp.client.get_profile_photos("me", limit=lim)
-        await delpfp.client(DeletePhotosRequest(pfplist))
-        await ok.edit(
-            f"`Successfully deleted {len(pfplist)} profile picture(s).`")
+        pfplist = await delpfp.client(
+            GetUserPhotosRequest(user_id=delpfp.from_id,
+                                 offset=0,
+                                 max_id=0,
+                                 limit=lim))
+        input_photos = []
+        for sep in pfplist.photos:
+            input_photos.append(
+                InputPhoto(id=sep.id,
+                           access_hash=sep.access_hash,
+                           file_reference=sep.file_reference))
+        await delpfp.client(DeletePhotosRequest(id=input_photos))
+        await delpfp.reply(
+            f"`Successfully deleted {len(input_photos)} profile picture(s).`")
+
+
+# ==== SET USERNAME
+
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.username (.*)"))
+
+
+# @bot.on(geezbot_cmd(outgoing=True, pattern="username (.*)"))
+async def update_username(username):
+    if delpfp.sender_id in SMEX_USERS:
+        """ For .username command, set a new username in Telegram. """
+        newusername = username.pattern_match.group(1)
+        try:
+            await username.client(UpdateUsernameRequest(newusername))
+            await username.reply(USERNAME_SUCCESS)
+        except UsernameOccupiedError:
+            await username.reply(USERNAME_TAKEN)
 
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
@@ -1366,7 +1401,8 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.13 beta4</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta11</code>
+🤖 𝘽𝙤𝙩 𝙏𝙮𝙥𝙚\t\t: <code>YKX</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1383,7 +1419,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.13 beta4 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta11 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
