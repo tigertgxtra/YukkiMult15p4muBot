@@ -1,4 +1,4 @@
-# v3.1.1.10 beta13
+# v3.1.1.10 beta15
 
 import os
 import sys
@@ -108,7 +108,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v3.1.1.10 beta13 is starting...")
+    print("bot v3.1.1.10 beta15 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1066,53 +1066,82 @@ async def update_username(username):
 
 # ==== COUNT CHATS
 
-@idk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@ydk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@wdk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@hdk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@sdk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@adk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@bdk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@cdk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@edk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
-@ddk.on(events.NewMessage(incoming=True, pattern=r"\.count$"))
+# STRINGS
+STAT_INDICATION = "`Collecting stats, Please wait....`"
 
-# @bot.on(geezbot_cmd(outgoing=True, pattern="count$"))
-async def count(event):
+@idk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"^\.stats$"))
+
+# @register(outgoing=True, pattern=r"^\.stats$")
+async def stats(event):
     if event.sender_id in SMEX_USERS:
-        """ For .count command, get profile stats. """
-        u = 0
-        g = 0
-        c = 0
-        bc = 0
-        b = 0
-        result = ""
-        await event.reply("`Processing..`")
-        dialogs = await bot.get_dialogs(limit=None, ignore_migrated=True)
-        for d in dialogs:
-            currrent_entity = d.entity
-            if isinstance(currrent_entity, User):
-                if currrent_entity.bot:
-                    b += 1
-                else:
-                    u += 1
-            elif isinstance(currrent_entity, Chat):
-                g += 1
-            elif isinstance(currrent_entity, Channel):
-                if currrent_entity.broadcast:
-                    bc += 1
-                else:
-                    c += 1
-            else:
-                print(d)
-
-        result += f"`Users:`\t**{u}**\n"
-        result += f"`Groups:`\t**{g}**\n"
-        result += f"`Super Groups:`\t**{c}**\n"
-        result += f"`Channels:`\t**{bc}**\n"
-        result += f"`Bots:`\t**{b}**"
-
-        await event.edit(result)
+        stat = await edit_or_reply(event, STAT_INDICATION)
+        start_time = time.time()
+        private_chats = 0
+        bots = 0
+        groups = 0
+        broadcast_channels = 0
+        admin_in_groups = 0
+        creator_in_groups = 0
+        admin_in_broadcast_channels = 0
+        creator_in_channels = 0
+        unread_mentions = 0
+        unread = 0
+        dialog: Dialog
+        async for dialog in event.client.iter_dialogs():
+            entity = dialog.entity
+            if isinstance(entity, Channel) and entity.broadcast:
+                broadcast_channels += 1
+                if entity.creator or entity.admin_rights:
+                    admin_in_broadcast_channels += 1
+                if entity.creator:
+                    creator_in_channels += 1
+            elif (
+                isinstance(entity, Channel)
+                and entity.megagroup
+                or not isinstance(entity, Channel)
+                and not isinstance(entity, User)
+                and isinstance(entity, Chat)
+            ):
+                groups += 1
+                if entity.creator or entity.admin_rights:
+                    admin_in_groups += 1
+                if entity.creator:
+                    creator_in_groups += 1
+            elif not isinstance(entity, Channel) and isinstance(entity, User):
+                private_chats += 1
+                if entity.bot:
+                    bots += 1
+            unread_mentions += dialog.unread_mentions_count
+            unread += dialog.unread_count
+        stop_time = time.time() - start_time
+        full_name = inline_mention(await event.client.get_me())
+        response = f"📊 **Stats for {full_name}** \n\n"
+        response += f"**Private Chats:** {private_chats} \n"
+        response += f"   • `Users: {private_chats - bots}` \n"
+        response += f"   • `Bots: {bots}` \n"
+        response += f"**Groups:** {groups} \n"
+        response += f"**Channels:** {broadcast_channels} \n"
+        response += f"**Admin in Groups:** {admin_in_groups} \n"
+        response += f"   • `Creator: {creator_in_groups}` \n"
+        response += f"   • `Admin Rights: {admin_in_groups - creator_in_groups}` \n"
+        response += f"**Admin in Channels:** {admin_in_broadcast_channels} \n"
+        response += f"   • `Creator: {creator_in_channels}` \n"
+        response += (
+            f"   • `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n"
+        )
+        response += f"**Unread:** {unread} \n"
+        response += f"**Unread Mentions:** {unread_mentions} \n\n"
+        response += f"⏱ __It Took:__ {stop_time:.02f}s \n"
+        await stat.edit(response)
 
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
@@ -1454,7 +1483,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta13</code>
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta15</code>
 🤖 𝘽𝙤𝙩 𝙏𝙮𝙥𝙚\t\t: <code>YKX</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
@@ -1472,7 +1501,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta13 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta15 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
