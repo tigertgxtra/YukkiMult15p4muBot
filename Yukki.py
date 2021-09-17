@@ -1,4 +1,4 @@
-# v2.0.13 beta2
+# v2.0.13 beta3
 
 import os
 import sys
@@ -108,7 +108,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v2.0.13 is starting...")
+    print("bot v2.0.13 beta3 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -998,16 +998,17 @@ async def set_profilepic(propic):
 # ==== DELETE PHOTO PROFIL
 
 
-@idk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@ydk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@wdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@hdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@sdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@adk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@bdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@cdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@edk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
-@ddk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp"))
+@idk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@ydk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@wdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@hdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@sdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@adk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@bdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@cdk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@edk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+@ddk.on(events.NewMessage(incoming=True, pattern=r"\.delpfp ?(.*)"))
+
 
 # @bot.on(geezbot_cmd(outgoing=True, pattern=r"delpfp"))
 async def remove_profilepic(delpfp):
@@ -1374,7 +1375,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.13 beta2</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.13 beta3</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1391,7 +1392,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.13 beta2 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.13 beta3 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
