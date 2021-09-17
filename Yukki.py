@@ -1,4 +1,4 @@
-# v3.1.1.10 beta15.3
+# v3.1.1.10 beta15.4
 
 import os
 import sys
@@ -109,7 +109,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v3.1.1.10 beta15.3 is starting...")
+    print("bot v3.1.1.10 beta15.4 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1153,7 +1153,7 @@ async def stats(event):
         response += f"**Unread:** {unread} \n"
         response += f"**Unread Mentions:** {unread_mentions} \n\n"
         response += f"⏱ __It Took:__ {stop_time:.02f}s \n"
-        await event.edit(response)
+        await stat.edit(response)
 
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
@@ -1495,7 +1495,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta15.3</code>
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta15.4</code>
 🤖 𝘽𝙤𝙩 𝙏𝙮𝙥𝙚\t\t: <code>YKX</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
@@ -1513,7 +1513,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta15.3 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta15.4 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
