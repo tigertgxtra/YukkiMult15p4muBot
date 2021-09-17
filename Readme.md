@@ -5,9 +5,9 @@
 </p>
 
 ## 🚀 Deploy on Heroku 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FYukkiBot%2FYukkiMultiSpamBot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FYukkiBot%2)
 
-You can Use these [API ID and API HASH](https://t.me/OfficialYukki/135) while deploying
+You can Use these [API ID and API HASH](https://t.me) while deploying
 
 ## String Session
 No Requirement of API ID and API HASH
@@ -17,6 +17,6 @@ No Requirement of API ID and API HASH
 
 
 ## Support Group
-   - Join [Yukki Support Group](https://t.me/officialyukki) for any assistance.
+   - Join [Yukki Support Group](https://t.me) for any assistance.
 ## Credits
-   - Thanks to [Yukki Team](https://t.me/officialyukki).
+   - Thanks to [Yukki Team](https://t.me).
