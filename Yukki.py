@@ -1,4 +1,4 @@
-# v3.1.1.10 beta15
+# v3.1.1.10 beta15.1
 
 import os
 import sys
@@ -108,7 +108,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v3.1.1.10 beta15 is starting...")
+    print("bot v3.1.1.10 beta15.1 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1083,7 +1083,7 @@ STAT_INDICATION = "`Collecting stats, Please wait....`"
 # @register(outgoing=True, pattern=r"^\.stats$")
 async def stats(event):
     if event.sender_id in SMEX_USERS:
-        stat = await edit_or_reply(event, STAT_INDICATION)
+        stat = await event.reply(STAT_INDICATION)
         start_time = time.time()
         private_chats = 0
         bots = 0
@@ -1141,7 +1141,7 @@ async def stats(event):
         response += f"**Unread:** {unread} \n"
         response += f"**Unread Mentions:** {unread_mentions} \n\n"
         response += f"⏱ __It Took:__ {stop_time:.02f}s \n"
-        await stat.edit(response)
+        await event.edit(response)
 
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
@@ -1479,11 +1479,11 @@ async def help(e):
 <code>.setpfp</code>
 <code>.delpfp</code>
 <code>.username</code>
-<code>.count</code>
+<code>.stats</code>
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta15</code>
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.10 beta15.1</code>
 🤖 𝘽𝙤𝙩 𝙏𝙮𝙥𝙚\t\t: <code>YKX</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
@@ -1501,7 +1501,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta15 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.10 beta15.1 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
