@@ -1,4 +1,4 @@
-# v2.0.13 beta1
+# v2.0.13 beta2
 
 import os
 import sys
@@ -1011,7 +1011,7 @@ async def set_profilepic(propic):
 
 # @bot.on(geezbot_cmd(outgoing=True, pattern=r"delpfp"))
 async def remove_profilepic(delpfp):
-    if event.sender_id in SMEX_USERS:
+    if delpfp.sender_id in SMEX_USERS:
         """ For .delpfp command, delete your current profile picture in Telegram. """
         group = delpfp.text[8:]
         if group == 'all':
@@ -1370,10 +1370,11 @@ async def help(e):
 <code>.addmemb</code>
 <code>.dm</code>
 <code>.setpfp</code>
+<code>.delpfp</code>
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.13 beta1</code>"""
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣: <code>v2.0.13 beta2</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
         
@@ -1390,7 +1391,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v2.0.13 beta1 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v2.0.13 beta2 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
