@@ -1,4 +1,4 @@
-# v3.1.1.11 beta3
+# v3.1.1.11 beta4
 
 import os
 import sys
@@ -16,7 +16,7 @@ from os import execl
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 from telethon.tl.functions.account import UpdateProfileRequest
-from Config import STRING, SUDO, BIO_MESSAGE, API_ID, API_HASH, STRING2, STRING3, STRING4 ,STRING5, STRING6, STRING7, STRING8 ,STRING9, STRING10
+from Config import STRING, SUDO,TMP_DOWNLOAD_DIRECTORY, BIO_MESSAGE, API_ID, API_HASH, STRING2, STRING3, STRING4 ,STRING5, STRING6, STRING7, STRING8 ,STRING9, STRING10
 import asyncio
 import telethon.utils
 from telethon.tl.types import InputPeerUser, ChatBannedRights
@@ -109,7 +109,7 @@ async def start_yukki():
     global edk
 
 
-    print("bot v3.1.1.11 beta3 is starting...")
+    print("bot v3.1.1.11 beta4 is starting...")
     print("")
     if smex:
         session_name = str(smex)
@@ -1151,8 +1151,18 @@ async def stats(event):
         await stat.edit(response)
 
 
+########[VAR]########
+
+ALIVE_NAME = "Alpha-XProject"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Alpha-X Userbot"
+
+BIO_MSG = "Alpha-X Userbot | @AlphaXProject"
+DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "Alpha-X Userbot | @AlphaXProject"
+BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+BOTLOG = False
 
 
+########[CLONE]########
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
 @ydk.on(events.NewMessage(incoming=True, pattern=r"\.clone ?(.*)"))
@@ -1169,45 +1179,56 @@ async def stats(event):
 # @ultroid_cmd(pattern="clone ?(.*)")
 async def _(event):
     if event.sender_id in SMEX_USERS:
-        eve = await event.reply("`Processing...`")
+        if event.fwd_from:
+            return
         reply_message = await event.get_reply_message()
-        whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
-        if whoiam.about:
-            mybio = str(ultroid_bot.me.id) + "01"
-            udB.set(f"{mybio}", whoiam.about)  # saving bio for revert
-        udB.set(f"{ultroid_bot.uid}02", whoiam.user.first_name)
-        if whoiam.user.last_name:
-            udB.set(f"{ultroid_bot.uid}03", whoiam.user.last_name)
         replied_user, error_i_a = await get_full_user(event)
         if replied_user is None:
-            await eve.edit(str(error_i_a))
-            return
+            await event.edit(str(error_i_a))
+            return False
         user_id = replied_user.user.id
-        profile_pic = await event.client.download_profile_photo(user_id)
+        profile_pic = await event.client.download_profile_photo(
+            user_id, Config.TMP_DOWNLOAD_DIRECTORY
+        )
+        # some people have weird HTML in their names
         first_name = html.escape(replied_user.user.first_name)
+        # https://stackoverflow.com/a/5072031/4723940
+        # some Deleted Accounts do not have first_name
         if first_name is not None:
+            # some weird people (like me) have more than 4096 characters in their names
             first_name = first_name.replace("\u2060", "")
         last_name = replied_user.user.last_name
+        # last_name is not Manadatory in @Telegram
         if last_name is not None:
             last_name = html.escape(last_name)
             last_name = last_name.replace("\u2060", "")
         if last_name is None:
-            last_name = "⁪⁬⁮⁮⁮"
+            last_name = "⁪⁬⁮⁮⁮⁮ ‌‌‌‌"
+        # inspired by https://telegram.dog/afsaI181
         user_bio = replied_user.about
         if user_bio is not None:
             user_bio = replied_user.about
-        await event.client(UpdateProfileRequest(first_name=first_name))
-        await event.client(UpdateProfileRequest(last_name=last_name))
-        await event.client(UpdateProfileRequest(about=user_bio))
-        pfile = await event.client.upload_file(profile_pic)  # pylint:disable=E060
-        await event.client(UploadProfilePhotoRequest(pfile))
-        await eve.delete()
-        await event.client.send_message(
-            event.chat_id, f"**I am `{first_name}` from now...**", reply_to=reply_message
+        await borg(functions.account.UpdateProfileRequest(first_name=first_name))
+        await borg(functions.account.UpdateProfileRequest(last_name=last_name))
+        await borg(functions.account.UpdateProfileRequest(about=user_bio))
+        pfile = await borg.upload_file(profile_pic)  # pylint:disable=E060
+        await borg(
+            functions.photos.UploadProfilePhotoRequest(pfile)  # pylint:disable=E0602
         )
+        await event.delete()
+        await borg.send_message(
+            event.chat_id, "**Who Are You? .. **", reply_to=reply_message
+        )
+        """
+        if BOTLOG:
+            await event.client.send_message(
+                BOTLOG_CHATID,
+                f"#CLONED\nSuccesfulley cloned [{first_name}](tg://user?id={user_id })",
+            )
+            """
 
 
-
+########[REVERT]########
 
 @idk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
 @ydk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
@@ -1221,33 +1242,28 @@ async def _(event):
 @ddk.on(events.NewMessage(incoming=True, pattern=r"\.revert$"))
 
 # @ultroid_cmd(pattern="revert$")
+# @borg.on(admin_cmd(pattern="revert$"))
 async def _(event):
     if event.sender_id in SMEX_USERS:
-        name = OWNER_NAME
-        ok = ""
-        mybio = str(ultroid_bot.me.id) + "01"
-        bio = "Error : Bio Lost"
-        chc = udB.get(mybio)
-        if chc:
-            bio = chc
-        fname = udB.get(f"{ultroid_bot.uid}02")
-        lname = udB.get(f"{ultroid_bot.uid}03")
-        if fname:
-            name = fname
-        if lname:
-            ok = lname
+        if event.fwd_from:
+            return
+        name = f"{DEFAULTUSER}"
+        bio = f"{DEFAULTUSERBIO}"
         n = 1
-        client = event.client
-        await client(
-            DeletePhotosRequest(await event.client.get_profile_photos("me", limit=n))
+        await borg(
+            functions.photos.DeletePhotosRequest(
+                await event.client.get_profile_photos("me", limit=n)
+            )
         )
-        await client(UpdateProfileRequest(about=bio))
-        await client(UpdateProfileRequest(first_name=name))
-        await client(UpdateProfileRequest(last_name=ok))
-        await event.reply("Succesfully reverted to your account back !")
-        udB.delete(f"{ultroid_bot.uid}01")
-        udB.delete(f"{ultroid_bot.uid}02")
-        udB.delete(f"{ultroid_bot.uid}03")
+        await borg(functions.account.UpdateProfileRequest(about=f"{bio}"))
+        await borg(functions.account.UpdateProfileRequest(first_name=f"{name}"))
+        await event.edit("succesfully reverted to your account back")
+        """
+        if BOTLOG:
+            await event.client.send_message(
+                BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile"
+            )
+        """    
 
 
 async def get_full_user(event):
@@ -1273,7 +1289,7 @@ async def get_full_user(event):
                 input_str = event.pattern_match.group(1)
             except IndexError as e:
                 return None, e
-            if event.message.entities is not None:
+            if event.message.entities:
                 mention_entity = event.message.entities
                 probable_user_mention_entity = mention_entity[0]
                 if isinstance(probable_user_mention_entity, MessageEntityMentionName):
@@ -1303,6 +1319,7 @@ async def get_full_user(event):
                     return replied_user, None
                 except Exception as e:
                     return None, e
+
 
 
 # ========[name changer]
@@ -1493,7 +1510,7 @@ async def help(e):
 
 For more help regarding usage of plugins type plugins name
 
-🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.11 beta3</code>
+🤖 𝘽𝙤𝙩 𝙑𝙚𝙧𝙨𝙞𝙤𝙣\t: <code>v3.1.1.11 beta4</code>
 🤖 𝘽𝙤𝙩 𝙏𝙮𝙥𝙚\t\t: <code>YKX</code>"""
        await e.reply(text, parse_mode='html', link_preview=None )
 
@@ -1511,7 +1528,7 @@ text = """
 
 print(text)
 print("")
-print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.11 beta3 Started Sucessfully.")
+print("SMEX! Yukki Mult1 5p4mX UBot v3.1.1.11 beta4 Started Sucessfully.")
 if len(sys.argv) not in (1, 3, 4):
     try:
         idk.disconnect()
