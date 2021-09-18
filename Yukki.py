@@ -1158,7 +1158,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Alpha-X Userbot"
 
 BIO_MSG = "Alpha-X Userbot | @AlphaXProject"
 DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "Alpha-X Userbot | @AlphaXProject"
-BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+# BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 BOTLOG = False
 
 
