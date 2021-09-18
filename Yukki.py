@@ -32,7 +32,8 @@ from telethon.errors import (
     ChannelPrivateError,
     ChannelPublicGroupNaError)
 from Utils import RAID, RRAID
-from Pong import *
+
+from userbot import *
 import html
 
 from telethon.tl.functions.account import UpdateProfileRequest
